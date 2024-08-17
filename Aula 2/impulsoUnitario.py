@@ -3,25 +3,23 @@ import matplotlib.pyplot as plt
 
 posicaoImpulsoUnitario = 400
 altura = 1000
+tamanho = 1000
 
-write_path = "Aula 2/Audios/impulsoUnitario.pcm"  # Caminho para salvar o arquivo com ruído
+write_path = "Aula 2/Audios/impulsoUnitario.pcm"
 
-# Criando o array do impulso unitário
-impulso = np.zeros(10000)
+impulso = np.zeros(tamanho)
+t = np.arange(0,tamanho,1)
+
 impulso[posicaoImpulsoUnitario] = altura
 
-# Salvando o impulso em um arquivo .pcm
 with open(write_path, 'wb') as out_f:
     out_f.write(impulso.tobytes())
 
-# Plotando apenas a reta do impulso unitário
-plt.vlines(posicaoImpulsoUnitario, 0, altura, colors='blue', label="Impulso Unitário")
+plt.title("Impulso Unitário")
 
-# Adicionando um círculo no ponto do impulso
-plt.scatter(posicaoImpulsoUnitario, altura, s=50, marker='o')
+plt.stem(t,impulso)
 
-# Ajustando os limites dos eixos para focar no impulso
-plt.xlim(posicaoImpulsoUnitario - 10, posicaoImpulsoUnitario + 10)
+plt.xlim(0, len(impulso))
 plt.ylim(0, altura + 100)
 
 plt.legend()
